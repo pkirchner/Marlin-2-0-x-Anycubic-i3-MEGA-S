@@ -39,7 +39,7 @@
 #define CONFIGURATION_H_VERSION 020005
 
 #define ANYCUBIC_TOUCHSCREEN
-#define ANYCUBIC_FILAMENT_RUNOUT_SENSOR
+//#define ANYCUBIC_FILAMENT_RUNOUT_SENSOR
 #define KNUTWURST_SPECIAL_MENU
 #define KNUTWURST_SPECIAL_MENU_WO_SD
 //#define ANYCUBIC_TFT_DEBUG
@@ -137,7 +137,7 @@
  * PLEASE READ THE WARNING ABOVE!
  * 
  */
-//#define KNUTWURST_BLTOUCH
+#define KNUTWURST_BLTOUCH
 
 /*
  * This feature is for debugging purpose only.
@@ -148,7 +148,7 @@
  * PLEASE READ THE WARNING ABOVE!
  * 
  */
-//#define KNUTWURST_DEBUG
+#define KNUTWURST_DEBUG
 
 
 /*******************************************************************************************
@@ -217,7 +217,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(knutwurst)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Philipp)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -642,9 +642,14 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // i3 Mega stock v5 hotend, 40W heater cartridge (3.6Ω @ 22°C)
-  #define  DEFAULT_Kp 15.94
-  #define  DEFAULT_Ki 1.17
-  #define  DEFAULT_Kd 54.19
+  //#define  DEFAULT_Kp 15.94
+  //#define  DEFAULT_Ki 1.17
+  //#define  DEFAULT_Kd 54.19
+  //My MK4 v5 Hotend, 40W
+  #define  DEFAULT_Kp 22.27
+  #define  DEFAULT_Ki 1.47
+  #define  DEFAULT_Kd 84.38
+
 
   // Ultimaker
   // #define DEFAULT_Kp 22.2
@@ -697,9 +702,13 @@
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   //Anycubic i3 Mega Ultrabase (0.9Ω @ 22°C)
-  #define DEFAULT_bedKp 251.78
-  #define DEFAULT_bedKi 49.57
-  #define DEFAULT_bedKd 319.73
+  //#define DEFAULT_bedKp 251.78
+  //#define DEFAULT_bedKi 49.57
+  //#define DEFAULT_bedKd 319.73
+  // Ultrabase at 24V
+  #define DEFAULT_bedKp 72.67
+  #define DEFAULT_bedKi 14.31
+  #define DEFAULT_bedKd 246.09
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -818,7 +827,7 @@
     #define X_MAX_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
     #define Y_MAX_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
     #define Z_MAX_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
-    //#define Z_MIN_PROBE_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
+    #define Z_MIN_PROBE_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
@@ -849,16 +858,16 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208
-#define Y_DRIVER_TYPE  TMC2208
-#define Z_DRIVER_TYPE  TMC2208
+#define X_DRIVER_TYPE  TMC2130
+#define Y_DRIVER_TYPE  TMC2130
+#define Z_DRIVER_TYPE  TMC2130
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+#define Z2_DRIVER_TYPE TMC2130
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE A4988
-#define E1_DRIVER_TYPE A4988
+#define E0_DRIVER_TYPE TMC2130
+//#define E1_DRIVER_TYPE TMC2130
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -910,7 +919,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #if ENABLED(KNUTWURST_MEGA)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 392 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 420 }
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_S)
@@ -1249,8 +1258,8 @@
  * Specify a Probe position as { X, Y, Z }
  */
 #if ENABLED(KNUTWURST_BLTOUCH)
-    #define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
-    //#define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //X-Carriage
+    //#define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
+    #define NOZZLE_TO_PROBE_OFFSET { 29, -15, 14 } //X-Carriage
 #endif
 
 #if DISABLED(KNUTWURST_BLTOUCH)
@@ -1262,7 +1271,7 @@
 #define MIN_PROBE_EDGE 30
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 8000
+#define XY_PROBE_SPEED 2000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -1279,8 +1288,8 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
-//#define EXTRA_PROBING    1
+#define MULTIPLE_PROBING 2
+#define EXTRA_PROBING    0
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1423,7 +1432,7 @@
 
         // For direct drive extruder v9 set to true, for geared extruder set to false.
         #if ENABLED(KNUTWURST_BMG)
-            #define INVERT_E0_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
+            #define INVERT_E0_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
         #else
             #define INVERT_E0_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
         #endif
@@ -1488,9 +1497,9 @@
 */
 
 #if ANY(KNUTWURST_MEGA, KNUTWURST_MEGA_S, KNUTWURST_MEGA_P)
-    #define X_BED_SIZE 225
+    #define X_BED_SIZE 220
     #define Y_BED_SIZE 220
-    #define Z_BED_HEIGHT 180
+    #define Z_BED_HEIGHT 205
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
@@ -1626,7 +1635,7 @@
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-#define RESTORE_LEVELING_AFTER_G28
+//#define RESTORE_LEVELING_AFTER_G28
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
@@ -1772,7 +1781,7 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing when homing all axes (G28).
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+//define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
@@ -1782,7 +1791,7 @@
 #if ANY(KNUTWURST_MEGA, KNUTWURST_MEGA_S, KNUTWURST_MEGA_P)
     // Homing speeds (mm/m)
     #define HOMING_FEEDRATE_XY (50*60)
-    #define HOMING_FEEDRATE_Z  (4*60)
+    #define HOMING_FEEDRATE_Z  (3*60)
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
